@@ -1,0 +1,1 @@
+{"mappings":"gfAAAA,EAAA,S","sources":["src/index.js"],"sourcesContent":["import * as galleryTask from './js/01-gallery';\nimport SimpleLightbox from 'simplelightbox';\n"],"names":["parcelRequire"],"version":3,"file":"index.8f0c151d.js.map"}
