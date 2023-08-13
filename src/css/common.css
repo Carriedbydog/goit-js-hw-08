@@ -1,3 +1,10 @@
+
+@import url('./01-gallery.css');
+@import url('../../node_modules/simplelightbox/dist/simple-lightbox.min.css');
+@import url('../../node_modules/basiclightbox/dist/basicLightbox.min.css');
+@import url('./03-feedback.css');
+
+
 * {
   box-sizing: border-box;
 }
