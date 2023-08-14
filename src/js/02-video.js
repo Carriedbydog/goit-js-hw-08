@@ -6,18 +6,29 @@ const player = new Player(iframe);
 player.on('play', function () {
   console.log('played the video!');
 });
-player.on('volumechange', function () {
-  console.log('volume changed!');
-});
-player.on('pause', function () {
-  console.log('paused the video!');
-});
-player.on('resume', function () {
-  console.log('resumed the video!');
-});
+
 player.on(
   'timeupdate',
   _.throttle(function () {
     console.log('time updated!');
-  }, 5000)
+  }, 3000)
 );
+
+localStorage.setItem('videoplayer-current-time', Date.now());
+player
+  .setCurrentTime(30.456)
+  .then(function (seconds) {
+    // seconds = the actual time that the player seeked to
+    console.log(seconds + ' seconds');
+  })
+  .catch(function (error) {
+    switch (error.name) {
+      case 'RangeError':
+        // the time was less than 0 or greater than the video’s duration
+        break;
+
+      default:
+        // some other error occurred
+        break;
+    }
+  });
