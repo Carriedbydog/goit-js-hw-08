@@ -1,18 +1,23 @@
+import Player from '@vimeo/player';
+import _ from 'lodash';
 const iframe = document.querySelector('iframe');
-const player = new Vimeo.Player(iframe);
+const player = new Player(iframe);
 
 player.on('play', function () {
   console.log('played the video!');
 });
-
-player.getVideoTitle().then(function (title) {
-  console.log('title:', title);
+player.on('volumechange', function () {
+  console.log('volume changed!');
 });
-
-const onTimeUpdate = function (data) {
-  console.log('qwewq');
-};
-player.on('volumeChange', onTimeUpdate);
-player.on('timeUpdate', function (data) {
-  console.log(data);
+player.on('pause', function () {
+  console.log('paused the video!');
 });
+player.on('resume', function () {
+  console.log('resumed the video!');
+});
+player.on(
+  'timeupdate',
+  _.throttle(function () {
+    console.log('time updated!');
+  }, 5000)
+);
