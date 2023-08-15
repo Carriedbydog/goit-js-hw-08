@@ -2,15 +2,15 @@ import throttle from 'lodash.throttle';
 import { saveToLS, loadFromLS } from './helpers';
 // ========================================================================
 
-const STORAGE_KEY = 'feedback-form-state';
-
-let obj = {};
-
 const refs = {
   form: document.querySelector('.feedback-form'),
   message: document.querySelector('.feedback-form textarea'),
   email: document.querySelector('.feedback-form input'),
 };
+
+const STORAGE_KEY = 'feedback-form-state';
+
+let obj = {};
 
 // ========================================================================
 refs.form.addEventListener('submit', onFormSubmit);
@@ -32,11 +32,10 @@ function onFormInput(e) {
   saveToLS(STORAGE_KEY, obj);
 }
 
-function onPageLoad() {
+function savePageLoad() {
   let formData = loadFromLS(STORAGE_KEY) || {};
-  console.log(formData);
   obj = formData;
   refs.email.value = obj?.email || '';
   refs.message.value = obj?.message || '';
 }
-onPageLoad();
+savePageLoad();
