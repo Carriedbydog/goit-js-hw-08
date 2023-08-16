@@ -1,26 +1,21 @@
-import * as basicLightbox from 'basiclightbox';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-// Add imports above this line
 import { galleryItems } from './gallery-items';
-// Change code below this line
 
 // ========================================
 const refs = {
   gallery: document.querySelector('.gallery'),
-  modalClose: document.querySelector('.basicLightbox'),
 };
 // ========================================
-const basicLightbox = require('basiclightbox');
 
-const makeGalleryImagesMarkup = ({ preview, original }) => {
+const makeGalleryImagesMarkup = ({ preview, original, description }) => {
   return `<li class="gallery__item">
-  <a class="gallery__link" href="large-image.jpg">
+  <a class="gallery__link" href="${original}">
     <img
       class="gallery__image"
-      src=${preview}
-      data-source=${original}
-      alt="Image description"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
     />
   </a>
 </li>`;
@@ -30,6 +25,11 @@ const makeGalleryImagesGroup = galleryItems
   .map(makeGalleryImagesMarkup)
   .join('');
 refs.gallery.insertAdjacentHTML('beforeend', makeGalleryImagesGroup);
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
 
 // ========================================
 
@@ -41,7 +41,7 @@ function onImageClick(event) {
   event.preventDefault();
   if (event.target.classList.contains('gallery__image')) {
     const imageSrc = event.target.dataset.source;
-    const instance = basicLightbox.create(`
+    const instance = new SimpleLightbox(`
     <img src=${imageSrc} width="800" height="600">
 `);
 
