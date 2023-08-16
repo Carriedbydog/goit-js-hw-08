@@ -19,10 +19,14 @@ refs.form.addEventListener('input', throttle(onFormInput, 500));
 
 function onFormSubmit(e) {
   e.preventDefault();
-  console.log(obj);
-  obj = {};
-  e.currentTarget.reset();
-  localStorage.removeItem(STORAGE_KEY);
+  if (refs.email.value.trim() === '' || refs.message.name.trim() === '') {
+    alert('Please fill all fields');
+  } else {
+    console.log('Form has been submitted', obj);
+    obj = {};
+    e.currentTarget.reset();
+    localStorage.removeItem(STORAGE_KEY);
+  }
 }
 
 function onFormInput(e) {
